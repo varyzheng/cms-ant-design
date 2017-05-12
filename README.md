@@ -25,4 +25,15 @@
 `dva new cms-ant-design`  
 等待dva初始化项目成功后，  
 `cd dva-quickstart`  
-`npm start`
+`npm start`  
+项目启动完毕后，会显示  
+Compiled successfully!
+
+The app is running at:
+
+http://localhost:8000/
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.  
+应该会自动打开默认浏览器访问此网址。可以看到dva的启动画面，至此项目初始化构建完毕，下一步就是引入antd。  
+## 后续内容请持续关注，可以Star一下，给予小弟更多鼓励。
