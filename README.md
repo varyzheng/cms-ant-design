@@ -6,23 +6,23 @@
 
 # 一. 项目构建与初始化
 
-##### 1.安装Node.js  
+### 1.安装Node.js  
 [点此进入官网下载](https://nodejs.org/en/) ，安装完成后，应该已经自动添加完环境变量，在命令行输入  
 `npm -v`
 可以查询到npm的版本号
-##### 2.安装cnpm (推荐安装，速度真的快很多)
+### 2.安装cnpm (推荐安装，速度真的快很多)
 `npm install -g cnpm --registry=https://registry.npm.taobao.org`  
 安装完成后  
 `cnpm -v`  
 查看版本号
-##### 3.安装dva-cli
+### 3.安装dva-cli
 `cnpm install -g dva-cli`  
 安装完成后  
 `dva -v`  
 查看版本号
-##### 4.使用`dva new`初始化项目  
+### 4.使用`dva new`初始化项目  
 进入您想创建项目的位置（Workspace），命令行输入  
 `dva new cms-ant-design`  
 等待dva初始化项目成功后，  
-    cd dva-quickstart  
-    npm start
+`cd dva-quickstart`  
+`npm start`
