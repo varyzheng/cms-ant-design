@@ -194,4 +194,54 @@ app.start('#root');
 ## 5.运行调试
 再次运行`npm start`, 访问http://localhost:8000/#/login  
 运行截图如图:  
-![picture](https://github.com/FantasyFiend/cms-ant-design/blob/master/src/assets/login1.jpeg)
+![picture](https://github.com/FantasyFiend/cms-ant-design/blob/master/src/assets/login1.jpeg)  
+下面添加css样式，将登录框居中  
+#### 5.1 创建src/routes/Login.css：
+```css
+.myContainer{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ddd;
+}
+form{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    margin-top:-16px;
+    margin-left:-228px;
+    text-align: center;
+}
+```
+#### 5.2 修改Login.js
+需要先引入css并通过className属性赋值
+```js
+import React from 'react';
+import { connect } from 'dva';//路由和组件的连接模块
+import LoginForm from '../components/LoginForm';//引入刚刚创建的组件
+import style from './Login.css'; //引入css，className对应css中的class名称
+
+/*Login为最终页面渲染时使用的组件，在此处应该组合页面中所有用到的组件。
+提供了之前定义LoginForm时候必须的submit属性，通过dispatch方法来把
+表单的值交给model来处理。type的值为model暴露给全局的接口，payload为传递
+的参数名*/
+const Login = ({ dispatch }) => {
+  const handleSubmit = (values) => {
+    dispatch({
+      type:'loginForm/submit',
+      payload:values
+    });
+  }
+  return(
+    <div className={style.myContainer}>
+      <LoginForm submit={handleSubmit}/>
+    </div>
+  );
+};
+//连接路由和组件
+export default connect()(Login);
+```  
+到此为止，已经能够将ant-design中的组件应用到自己的网站中并加以样式了。接下来内容是一些更复杂组件的整合与使用。
+## 后续内容请持续关注，可以Star一下，给予小弟更多鼓励。

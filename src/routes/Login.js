@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';//路由和组件的连接模块
 import LoginForm from '../components/LoginForm';//引入刚刚创建的组件
+import style from './Login.css';
 
 /*Login为最终页面渲染时使用的组件，在此处应该组合页面中所有用到的组件。
 提供了之前定义LoginForm时候必须的submit属性，通过dispatch方法来把
@@ -14,7 +15,7 @@ const Login = ({ dispatch }) => {
     });
   }
   return(
-    <div>
+    <div className={style.myContainer}>
       <LoginForm submit={handleSubmit}/>
     </div>
   );
