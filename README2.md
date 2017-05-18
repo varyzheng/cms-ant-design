@@ -194,7 +194,7 @@ app.start('#root');
 ## 5.运行调试
 再次运行`npm start`, 访问http://localhost:8000/#/login  
 运行截图如图:  
-![picture](https://github.com/FantasyFiend/cms-ant-design/blob/master/src/assets/login1.jpeg)  
+![picture](https://github.com/FantasyFiend/cms-ant-design/blob/master/src/assets/login1.jpeg)   
 下面添加css样式，将登录框居中  
 #### 5.1 创建src/routes/Login.css：
 ```css
