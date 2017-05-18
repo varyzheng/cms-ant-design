@@ -6,7 +6,14 @@
         "dva-hmr",
         "transform-runtime",
         ["import", { "libraryName": "antd", "style": "css" }]
-      ]
+      ],
+      "proxy":{
+        "/service":{
+          "target": "http://localhost:7999/",
+          "changeOrigin": true,
+          "pathRewrite": {"^/service" : ""}
+        }
+      }
     },
     "production": {
       "extraBabelPlugins": [

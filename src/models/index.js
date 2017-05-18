@@ -18,10 +18,15 @@ export default {
   },
   effects: {
     *checkLogin({ payload: {} }, { call, put }) {
-      alert(3);
-      const { data } = yield call(userService.checkLogin);
-      console.log(data);
-      yield put({ type: 'save', payload: { user:data.obj.user, system:data.obj.system, module:data.obj.module, data:data.list } });
+      http.get({
+        host:"localhost",
+        port:8000,
+        path:"/service/user/checkLogin",
+        success:(chunk) => {
+          let data = JSON.parse(chunk);
+          put({ type: 'save', payload: { user:data, system:data.system, module:data.module} });
+        }
+      });
     },
   },
   subscriptions: {

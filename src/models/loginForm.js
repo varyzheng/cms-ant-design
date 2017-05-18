@@ -13,17 +13,13 @@ export default {
   reducers: {
   'submit'(state, { payload: {username, password}}) {
       http.post({
-        host:MANAGE_SERVICE_HOST,
-        port:MANAGE_SERVICE_PORT,
-        path:"/login",
+        host:"localhost",
+        port:8000,
+        path:"/service/user/login",
         data:{username:username, password:password},
         success:(chunk) => {
           let data = JSON.parse(chunk);
-          if (data.flag && data.obj) {
-            window.location.href = '/#/index';
-          }else{
-            message.error('登陆失败,用户名或密码错误');
-          }
+          console.log(data);
         }
       });
       return state;
