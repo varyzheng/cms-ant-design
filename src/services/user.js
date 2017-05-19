@@ -1,15 +1,22 @@
-import http from '../utils/HttpUtil';
+import request from '../utils/request';
 
+export function login({username, password}){
+  return request("/service/user/login", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({username:username, password:password})
+  });
+}
 export function checkLogin(){
-  http.get({
-    host:"localhost",
-    port:8000,
-    path:"/service/user/checkLogin",
-    success:(chunk) => {
-      let data = JSON.parse(chunk);
-      console.log("-------------------userService------------");
-      console.log(data);
-      return data;
+  return request("/service/user/checkLogin", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
     }
   });
+}
+export function fetch() {
+  return request(`/api/users?_page=1&_limit=5`);
 }

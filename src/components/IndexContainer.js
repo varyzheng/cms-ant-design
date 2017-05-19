@@ -15,6 +15,9 @@ class IndexContainer extends React.Component {
   componentWillMount() {
     this.props.checkLogin();
   }
+  componentWillReceiveProps(props) {
+    this.setState({user:props.user, system:props.system, module:props.module});
+  }
   render() {
     console.log("IndexContainer--------system,module,data");
     console.log(this.state);

@@ -12,6 +12,11 @@
           "target": "http://localhost:7999/",
           "changeOrigin": true,
           "pathRewrite": {"^/service" : ""}
+        },
+        "/api": {
+          "target": "http://jsonplaceholder.typicode.com/",
+          "changeOrigin": true,
+          "pathRewrite": { "^/api" : "" }
         }
       }
     },

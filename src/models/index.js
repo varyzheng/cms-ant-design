@@ -13,20 +13,34 @@ export default {
   },
   reducers: {
     save(state, {payload:{user, system, module, data}}) {
+      console.log("------save-------");
+      console.log(user);
       return { ...state, user, system, module, data };
     },
+    
   },
   effects: {
+    // *checkLogin({ payload: {} }, { call, put }) {
+    //   console.log(this.state);
+    //   http.get({
+    //     host:"localhost",
+    //     port:8000,
+    //     path:"/service/user/checkLogin",
+    //     success:(chunk) => {
+    //       let data = JSON.parse(chunk);
+    //       console.log("--------checkLogin---------");
+    //       t.save({ payload: { user:data, system:data.system, module:data.module} });
+    //     }
+    //   });
+    // },
     *checkLogin({ payload: {} }, { call, put }) {
-      http.get({
-        host:"localhost",
-        port:8000,
-        path:"/service/user/checkLogin",
-        success:(chunk) => {
-          let data = JSON.parse(chunk);
-          put({ type: 'save', payload: { user:data, system:data.system, module:data.module} });
-        }
-      });
+      const {data} = yield call(userService.checkLogin);
+      if (!data.user) {
+        window.location.href = "/#/login";
+      }else{
+        console.log(data);
+        put({ type:'save', payload: { user:data, system:data.system, module:data.module} });
+      }
     },
   },
   subscriptions: {
