@@ -1,32 +1,56 @@
 import { PropTypes } from 'prop-types';
-// import { Form, Icon, Input, Button } from 'antd';
-// const FormItem = Form.Item;
+import { connect } from 'dva';
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import SidePublic from './SidePublic';
+const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
 
 class IndexContainer extends React.Component {
   constructor(props) {
     super(props);
   }
   state = {
-    user:this.props.user,
-    system:this.props.system,
-    module:this.props.module,
-    data:this.props.data
-  }
-  componentWillMount() {
-    this.props.checkLogin();
+    user:this.props.user
   }
   componentWillReceiveProps(props) {
-    this.setState({user:props.user, system:props.system, module:props.module});
+    this.setState({user:props.user});
   }
   render() {
-    console.log("IndexContainer--------system,module,data");
-    console.log(this.state);
-    return <div>1</div>;
+    return <Layout>
+            <Header className="header">
+              <div className="logo" />
+              <Menu
+                theme="dark"
+                mode="horizontal"
+                defaultSelectedKeys={[this.state.user.system]}
+                style={{ lineHeight: '64px' }}
+              >
+                <Menu.Item key="public">公共系统</Menu.Item>
+                <Menu.Item key="siwangyin">黑光避难所</Menu.Item>
+                <Menu.Item key="letspogo">Let's Pogo</Menu.Item>
+              </Menu>
+            </Header>
+            <Layout>
+              <Sider width={200} style={{ background: '#fff' }}>
+                <SidePublic module={this.state.user.module}/>
+              </Sider>
+              <Layout style={{ padding: '0 24px 24px' }}>
+                <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+                  Content
+                </Content>
+              </Layout>
+            </Layout>
+          </Layout>;
   }
 }
 IndexContainer.propTypes = {
-  system: PropTypes.string.isRequired,
-  module: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired
+  user: PropTypes.object
 };
-export default IndexContainer;
+
+function mapStateToProps(state) {
+  return {
+    user:state.index.user
+  };
+}
+
+export default connect(mapStateToProps)(IndexContainer);
