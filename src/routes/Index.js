@@ -15,9 +15,15 @@ const Index = ({dispatch, user, features, data}) => {
       payload:{features}
     });
   }
+  const saveUser = (user) => {
+    dispatch({
+      type:'index/saveUser',
+      payload:user
+    });
+  }
   return(
     <div>
-      <IndexContainer checkLogin={checkLogin} changeFeatures={changeFeatures}/>
+      <IndexContainer checkLogin={checkLogin} changeFeatures={changeFeatures} saveUser={saveUser}/>
     </div>
   );
 };

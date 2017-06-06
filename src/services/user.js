@@ -25,6 +25,15 @@ export function queryUser(){
     }
   });
 }
+export function saveUser(payload){
+  return request("/service/user/saveUser", {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}
 export function fetch() {
   return request(`/api/users?_page=1&_limit=5`);
 }

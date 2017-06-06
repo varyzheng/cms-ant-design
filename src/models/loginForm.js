@@ -19,6 +19,7 @@ export default {
       if (data.flag && data.obj) {
         yield session.setAttribute("user", data.obj);
         yield put(routerRedux.push('/index'));
+        window.location.reload();
       }else if (!data.flag){
         message.error("登录失败，请刷新页面后重新尝试！");
       }else{

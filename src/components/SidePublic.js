@@ -12,7 +12,7 @@ class SidePublic extends React.Component {
     render() {
         return <Menu
                   mode="inline"
-                  defaultSelectedKeys={["queryUser"]}
+                  defaultSelectedKeys={[]}
                   defaultOpenKeys={[this.state.module]}
                   style={{ height: '100%' }}
                   onClick={(target) => {this.props.changeFeatures(target.key)}}

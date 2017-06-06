@@ -1,54 +1,34 @@
 import { PropTypes } from 'prop-types';
 import { connect } from 'dva';
-import { Layout, Menu, Breadcrumb, Icon, Table } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import SidePublic from './SidePublic';
+import QueryTable from './user/QueryTable';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 class IndexContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      user:props.user,
+      features:props.features,
+      data:props.data
+    }
   }
-  state = {
-    user:this.props.user,
-    features:null,
-    data:null
-  }
+  
   componentWillReceiveProps(props) {
+    alert(1);
     this.setState({user:props.user, features:props.features, data:props.data});
   }
+  componentDidMount
   render() {
+    console.log(this.state);
     let indexContent = "未选中功能，或该功能暂未开放!";
     let features = this.state.features;
     if (features != null) {
       switch(features) {
         case 'queryUser':
-          const columns = [{
-            title: '用户名',
-            dataIndex: 'username',
-            key: 'username',
-          }, {
-            title: '密码',
-            dataIndex: 'password',
-            key: 'password',
-          }, {
-            title: '账号等级',
-            dataIndex: 'accountLevel',
-            key: 'accountLevel',
-          }, {
-            title: '默认系统',
-            dataIndex: 'system',
-            key: 'system',
-          }, {
-            title: '默认模块',
-            dataIndex: 'module',
-            key: 'module',
-          }, {
-            title: '状态',
-            dataIndex: 'state',
-            key: 'state',
-          }];
-          indexContent = <Table dataSource={this.state.data} columns={columns} />;
+          indexContent = <QueryTable data={this.state.data} saveUser={(user) => {this.props.saveUser(user)}}/>;
           break;
       }
     }
@@ -80,10 +60,13 @@ class IndexContainer extends React.Component {
   }
 }
 IndexContainer.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  features:PropTypes.string,
+  data:PropTypes.array
 };
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     user:state.index.user,
     features:state.index.features,
