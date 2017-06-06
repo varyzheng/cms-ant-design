@@ -4,7 +4,7 @@ const { Sider } = Layout;
 
 class SidePublic extends React.Component {
     state = {
-        module:this.props.module
+        module:this.props.module,
     };
     componentWillReceiveProps(props) {
         this.setState({module:props.module});
@@ -15,6 +15,7 @@ class SidePublic extends React.Component {
                   defaultSelectedKeys={["queryUser"]}
                   defaultOpenKeys={[this.state.module]}
                   style={{ height: '100%' }}
+                  onClick={(target) => {this.props.changeFeatures(target.key)}}
                 >
                   <SubMenu key="user" title={<span><Icon type="user" />用户管理</span>}>
                     <Menu.Item key="queryUser">用户查询</Menu.Item>

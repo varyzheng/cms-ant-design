@@ -8,7 +8,9 @@ import { routerRedux } from 'dva/router'
 export default {
   namespace: 'index',
   state: {
-    user:null
+    user:null,
+    features:null,
+    data:null
   },
   reducers: {
     save(state, {payload:value}) {
@@ -24,6 +26,10 @@ export default {
         yield put({ type:'save', payload: { user } });
       }
     },
+    *changeFeatures({payload}, {call, put}) {
+      let chunk = yield call(userService.queryUser);
+      yield put({type:'save', payload:{data:chunk.data, features:payload.features}});
+    }
   },
   subscriptions: {
     setup ({ dispatch }) {

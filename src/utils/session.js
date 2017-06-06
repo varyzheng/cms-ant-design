@@ -1,6 +1,6 @@
 import * as cookie from './cookie';
 
-const SESSION_TIME = 600000;
+const SESSION_TIME = 3600000;
 const SYSTEM_SESSION_NAME = "SWY_SESSION";
 const session = () => {};
 session.setAttribute = (attr, value) => {

@@ -17,6 +17,14 @@ export function checkLogin(){
     }
   });
 }
+export function queryUser(){
+  return request("/service/user/queryUser", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
 export function fetch() {
   return request(`/api/users?_page=1&_limit=5`);
 }
