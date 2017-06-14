@@ -288,6 +288,6 @@ const Login = ({ dispatch }) => {
 export default connect()(Login);
 ```  
 运行截图如图:  
-![picture](https://github.com/varyzheng/antd-demo-step2/blob/master/src/assets/loginFial.png)  
+![picture](https://github.com/varyzheng/antd-demo-step2/blob/master/src/assets/loginFinal.png)  
 到此为止，已经能够将ant-design中的组件应用到自己的网站中并加以样式了。接下来内容是一些更复杂组件的整合与使用。
 ## 后续内容请持续关注，可以Star一下，给予小弟更多鼓励。
