@@ -15,15 +15,40 @@ const Index = ({dispatch, user, features, data}) => {
       payload:{features}
     });
   }
+  const changeSystem = (system) => {
+    dispatch({
+      type:'index/changeSystem',
+      payload:{system}
+    });
+  }
   const saveUser = (user) => {
     dispatch({
       type:'index/saveUser',
       payload:user
     });
   }
+  const saveNav = (nav) => {
+    dispatch({
+      type:'index/saveNav',
+      payload:nav
+    });
+  }
+  const addUser = (user) => {
+    dispatch({
+      type:'index/addUser',
+      payload:user
+    });
+  }
   return(
     <div>
-      <IndexContainer checkLogin={checkLogin} changeFeatures={changeFeatures} saveUser={saveUser}/>
+      <IndexContainer 
+        checkLogin={checkLogin} 
+        changeFeatures={changeFeatures} 
+        changeSystem={changeSystem} 
+        saveUser={saveUser} 
+        addUser={addUser} 
+        saveNav={saveNav}
+      />
     </div>
   );
 };

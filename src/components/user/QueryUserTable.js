@@ -1,9 +1,8 @@
 import { Table, Popconfirm } from 'antd';
 import EditableCell from '../EditableCell';
-import { connect } from 'dva';
 import { dataToEditableData, editableDataToData } from '../../utils/DataFormatter';
 
-class QueryTable extends React.Component {
+class QueryUserTable extends React.Component {
   constructor(props) {
     super(props);
     this.columns = [{
@@ -41,7 +40,7 @@ class QueryTable extends React.Component {
       dataIndex: 'operation',
       key:'operation',
       render: (text, record, index) => {
-        const { editable } = this.state.data[index].accountLevel;
+        const { editable } = this.state.data[index].state;
         return (
           <div className="editable-row-operations">
             {
@@ -62,11 +61,11 @@ class QueryTable extends React.Component {
       },
     }];
     this.state = {
-      data:dataToEditableData(props.data)
+      data:props.data
     };
   }
   componentWillReceiveProps(props){
-    this.setState({data:dataToEditableData(props.data)});
+    this.setState({data:props.data});
   }
   renderColumns(data, index, key, text) {
     const { editable, status } = data[index][key];
@@ -87,8 +86,6 @@ class QueryTable extends React.Component {
   }
   edit(index) {
     const { data } = this.state;
-    console.log(index);
-    console.log(data);
     Object.keys(data[index]).forEach((item) => {
       if (data[index][item] && typeof data[index][item].editable !== 'undefined') {
         data[index][item].editable = true;
@@ -126,10 +123,5 @@ class QueryTable extends React.Component {
     return <Table bordered dataSource={dataSource} columns={columns}  rowKey="id"/>;
   }
 }
-function mapStateToProps(state) {
-  return {
-    data:state.index.data
-  };
-}
 
-export default connect(mapStateToProps)(QueryTable);
+export default QueryUserTable;

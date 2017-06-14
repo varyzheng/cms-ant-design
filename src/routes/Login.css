@@ -6,7 +6,7 @@
     right: 0;
     background-color: #ddd;
 }
-form{
+.myContainer form{
     position: absolute;
     top:50%;
     left: 50%;
