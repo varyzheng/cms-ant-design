@@ -39,7 +39,7 @@ Note that the development build is not optimized.
 To create a production build, use npm run build.    
 
 应该会自动打开默认浏览器访问此网址。可以看到dva的启动画面，至此项目初始化构建完毕。  
-本项目最终的代码地址在[antd-demo-step1](https://github.com/varyzheng/antd-demo-step1)，可以作为一个空的antd项目来使用。  
+第一步最终的代码地址在[antd-demo-step1](https://github.com/varyzheng/antd-demo-step1)，可以作为一个空的antd项目来使用。  
 下一步就是引入antd。  
 # <a name="step2">二. 引入antd组件（制作登录页面）</a>  
 ##  本节将制作登录页面，来实例演示如何将antd的组件交给dva框架管理。
@@ -236,8 +236,8 @@ app.start('#root');
 ```  
 ## 5.运行调试
 再次运行`npm start`, 浏览器自动访问首页为登录页，也可访问http://localhost:8000/#/login  
-运行截图如图:  
-![picture](https://github.com/varyzheng/cms-ant-design/blob/master/src/assets/login1.jpeg)   
+<!--运行截图如图:  
+![picture](https://github.com/varyzheng/cms-ant-design/blob/master/src/assets/login1.jpeg)   -->
 下面添加css样式，将登录框居中  
 #### 5.1 创建src/routes/Login.css：
 ```css
@@ -287,7 +287,7 @@ const Login = ({ dispatch }) => {
 //连接路由和组件
 export default connect()(Login);
 ```  
-运行截图如图:  
-![picture](https://github.com/varyzheng/antd-demo-step2/blob/master/src/assets/loginFinal.png)  
-到此为止，已经能够将ant-design中的组件应用到自己的网站中并加以样式了。接下来内容是一些更复杂组件的整合与使用。
+<!--运行截图如图:  
+![picture](https://github.com/varyzheng/antd-demo-step2/blob/master/src/assets/loginFinal.png)  -->
+第二步最终的代码地址在[antd-demo-step2](https://github.com/varyzheng/antd-demo-step2)，<b style="color:#8a6363">切记运行前要`cnpm install`一下</b>，下一步就是实现前后台数据交互。 
 ## 后续内容请持续关注，可以Star一下，给予小弟更多鼓励。
