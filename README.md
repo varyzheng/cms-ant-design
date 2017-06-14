@@ -4,6 +4,9 @@
 ##### 1.  如果您已经掌握了基本的[React](https://facebook.github.io/react/docs/hello-world.html),[dva](https://github.com/dvajs/dva),[Redux](http://redux.js.org),本文的内容就比较简单了,觉得英文文档麻烦的同学推荐看一下[阮一峰的博客](http://www.ruanyifeng.com/blog/archives.html).
 ##### 2.  如有问题请随时联系,欢迎各位批评指正. 邮箱:522381613@qq.com
 
+# 目录
+### [项目构建与初始化](#jump)
+
 # 一. 项目构建与初始化
 
 ### 1.安装Node.js  
@@ -34,6 +37,6 @@ http://localhost:8000/
 Note that the development build is not optimized.  
 To create a production build, use npm run build.    
 
-应该会自动打开默认浏览器访问此网址。可以看到dva的启动画面，至此项目初始化构建完毕，下一步就是引入antd。  
+<a name="jump">应该会自动打开默认浏览器访问此网址。可以看到dva的启动画面，至此项目初始化构建完毕，下一步就是引入antd。  </a>
 ## 后续内容请持续关注，可以Star一下，给予小弟更多鼓励。
 ### [进入下一步](https://github.com/FantasyFiend/cms-ant-design/blob/master/README2.md)
