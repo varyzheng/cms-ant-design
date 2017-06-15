@@ -7,8 +7,10 @@
 # 目录
 ### [一. 项目构建与初始化](#step1)  
 ### [二. 引入antd组件（制作登录页面）](#step2)
+### [三. 数据交互（登陆验证）](#step3)
 
-# <a name="step1">一. 项目构建与初始化</a>
+# 三步上手ant-design
+## <a name="step1">一. 项目构建与初始化</a>
 
 ### 1.安装Node.js  
 [点此进入官网下载](https://nodejs.org/en/) ，安装完成后，应该已经自动添加完环境变量，在命令行输入  
@@ -41,7 +43,7 @@ To create a production build, use npm run build.
 应该会自动打开默认浏览器访问此网址。可以看到dva的启动画面，至此项目初始化构建完毕。  
 第一步最终的代码地址在[antd-demo-step1](https://github.com/varyzheng/antd-demo-step1)，可以作为一个空的antd项目来使用。  
 下一步就是引入antd。  
-# <a name="step2">二. 引入antd组件（制作登录页面）</a>  
+## <a name="step2">二. 引入antd组件（制作登录页面）</a>  
 ##  本节将制作登录页面，来实例演示如何将antd的组件交给dva框架管理。
 ### 1. 安装antd
 通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。  
@@ -178,11 +180,11 @@ const Login = ({ dispatch }) => {
 //连接路由和组件
 export default connect()(Login);
 ```
-#### 3.2 修改src/router.js文件，加入login的路由，并且把默认页面设置为登录页面
+#### 3.2 修改src/router.js文件，加入login的路由，并且把默认页面设置为登录页面（这个随意设置，一般设置为首页，我这里为了方便）
 ``` js
 import React from 'react';
 import { Router, Route } from 'dva/router';
-// import IndexPage from './routes/IndexPage';
+import IndexPage from './routes/IndexPage';
 import Login from './routes/Login';
 
 function RouterConfig({ history }) {
@@ -190,6 +192,7 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Route path="/" component={Login} />
       <Route path="/login" component={Login} />
+      <Route path="/indexPage" component={IndexPage} />
     </Router>
   );
 }
@@ -236,8 +239,8 @@ app.start('#root');
 ```  
 ## 5.运行调试
 再次运行`npm start`, 浏览器自动访问首页为登录页，也可访问http://localhost:8000/#/login  
-<!--运行截图如图:  
-![picture](https://github.com/varyzheng/cms-ant-design/blob/master/src/assets/login1.jpeg)   -->
+运行截图如图:  
+![picture](http://siwangyin.cn/images/login1.jpeg)   
 下面添加css样式，将登录框居中  
 #### 5.1 创建src/routes/Login.css：
 ```css
@@ -287,7 +290,100 @@ const Login = ({ dispatch }) => {
 //连接路由和组件
 export default connect()(Login);
 ```  
-<!--运行截图如图:  
-![picture](https://github.com/varyzheng/antd-demo-step2/blob/master/src/assets/loginFinal.png)  -->
+运行截图如图:  
+![picture](http://siwangyin.cn/images/login2.png)  
 第二步最终的代码地址在[antd-demo-step2](https://github.com/varyzheng/antd-demo-step2)，<b style="color:#8a6363">切记运行前要`cnpm install`一下</b>，下一步就是实现前后台数据交互。 
+## <a name="step3">三. 数据交互（登录验证）</a>
+## 1.创建服务（src/services）  
+创建src/services/user.js，注释中的代码可以发送请求到后台，可以使用proxy来实现rest风格请求路径，修改.roadhogrc，增加proxy模块  
+##### .roadhogrc
+```.roadhogrc
+{
+  "entry": "src/index.js",
+  "env": {
+    "development": {
+      "extraBabelPlugins": [
+        "dva-hmr",
+        "transform-runtime",
+        ["import", { "libraryName": "antd", "style": "css" }]
+      ],
+      "proxy":{
+        "/service":{
+          "target": "http://localhost:7999/",
+          "changeOrigin": true,
+          "pathRewrite": {"^/service" : ""}
+        },
+        "/api": {
+          "target": "http://jsonplaceholder.typicode.com/",
+          "changeOrigin": true,
+          "pathRewrite": { "^/api" : "" }
+        }
+      }
+    },
+    "production": {
+      "extraBabelPlugins": [
+        "transform-runtime"
+      ]
+    }
+  }
+}
+```
+##### src/services/user.js 就不访问后台了，我这里用数据模拟一下
+```js
+/*
+import request from '../utils/request';
+
+export function login({username, password}){
+  return request("/service/siwangyin/login", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({username:username, password:password})
+  });
+}
+*/
+const users = [
+    {username:1, password:1},
+    {username:2, password:2},
+    {username:3, password:3},
+];
+export function login({username, password}){
+  //表单获得的值为string类型，这里是'=='而不是'==='，filter方法返回为数组，验证数据时要注意。
+  return users.filter((user) => (user.username == username && user.password == password));
+}
+```
+## 2 修改src/models/loginForm.js 
+```js
+import { message } from 'antd';
+import { routerRedux } from 'dva/router';
+import * as userService from '../services/user';
+/*namespace为此model暴露给整个应用的入口，state为初始值，React组件的getInitialState的值可以由此初始化，reducers为接口
+下的各个方法，当前配置即可用loginForm/submit来调用这个submit方法，与之前(src/routes/Login.js中的dispatch路径一致)*/
+message.config({
+  top: 100,
+  duration: 1.5,
+});
+export default {
+  namespace: 'loginForm',
+  state: [],
+  reducers: {},
+  effects:{
+    *'submit'({ payload: values}, {call, put}) {
+      let data = yield call(userService.login, values);
+      console.log("--------------data:",data);
+      if (data[0]) {
+        //数据存在说明登录成功, 跳转到首页
+        yield put(routerRedux.push('/indexPage'));
+      }else{
+        message.error("用户名或密码错误！");
+      }
+    },
+  },
+};
+```
+运行截图如图:  
+![picture](http://siwangyin.cn/images/login3.png)  
+第三步最终的代码地址在[antd-demo-step3](https://github.com/varyzheng/antd-demo-step3)，<b style="color:#8a6363">切记运行前要`cnpm install`一下</b>，到此算是初步完成了components-model-service的基本流程，下一步就是session的管理。 
+
 ## 后续内容请持续关注，可以Star一下，给予小弟更多鼓励。
