@@ -1,6 +1,5 @@
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Icon, Button, AutoComplete } from 'antd';
 const FormItem = Form.Item;
-const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
 
 class AddUserForm extends React.Component {

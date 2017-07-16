@@ -6,6 +6,7 @@ import SideSiwangyin from './SideSiwangyin';
 import QueryUserTable from './user/QueryUserTable';
 import QueryNavTable from './nav/QueryNavTable';
 import AddUserForm from './user/AddUserForm';
+import AddNavForm from './nav/AddNavForm';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -43,6 +44,8 @@ class IndexContainer extends React.Component {
         return <AddUserForm addUser={(user) => {this.props.addUser(user)}}/>;
       case 'queryNav':
         return <QueryNavTable data={this.state.data} saveNav={(nav) => {this.props.saveNav(nav)}}/>;
+      case 'addNav':
+        return <AddNavForm addNav={(nav) => {this.props.addNav(nav)}} navList={this.state.data}/>;  
       default:
         return "未选中功能，或该功能暂未开放!";
     }

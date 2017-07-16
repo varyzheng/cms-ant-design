@@ -68,3 +68,12 @@ export function saveNav(payload){
     body: JSON.stringify(payload)
   });
 }
+export function addNav(payload){
+  return request("/service/siwangyin/addNav", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}

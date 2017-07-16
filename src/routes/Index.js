@@ -39,6 +39,12 @@ const Index = ({dispatch, user, features, data}) => {
       payload:user
     });
   }
+  const addNav = (nav) => {
+    dispatch({
+      type:'index/addNav',
+      payload:nav
+    });
+  }
   return(
     <div>
       <IndexContainer 
@@ -48,6 +54,7 @@ const Index = ({dispatch, user, features, data}) => {
         saveUser={saveUser} 
         addUser={addUser} 
         saveNav={saveNav}
+        addNav={addNav} 
       />
     </div>
   );

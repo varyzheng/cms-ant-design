@@ -32,6 +32,10 @@ export default {
     addUser(state) {
       message.success('添加用户成功!');
       return {...state};
+    },
+    addNav(state) {
+      message.success('添加导航成功!');
+      return {...state};
     }
   },
   effects: {
@@ -57,6 +61,10 @@ export default {
           chunk = yield call(siwangyinService.queryNav);
           yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
           break;
+        case 'addNav':
+          chunk = yield call(siwangyinService.queryNav);
+          yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
+          break;
       }
     },
     *changeSystem({payload}, {call, put}) {
@@ -78,6 +86,12 @@ export default {
       let chunk = yield call(siwangyinService.saveNav, payload);
       if (chunk.data.flag) {
         yield put({type:'updateNav'});
+      }
+    },
+    *addNav({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.addNav, payload);
+      if (chunk.data.flag) {
+        put({type:'addNav'});
       }
     },
     *queryNavTags({payload}, {call, put}){
