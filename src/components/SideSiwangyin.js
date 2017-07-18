@@ -23,8 +23,8 @@ class SideSiwangyin extends React.Component {
                   </SubMenu>
                 
                   <SubMenu key="tags" title={<span><Icon type="tags" />标签管理</span>}>
-                    <Menu.Item key="queryCommodity">标签查询</Menu.Item>
-                    <Menu.Item key="addCommodity">添加标签</Menu.Item>
+                    <Menu.Item key="queryTag">标签查询</Menu.Item>
+                    <Menu.Item key="addTag">添加标签</Menu.Item>
                   </SubMenu>
                   
                   <SubMenu key="commodity" title={<span><Icon type="book" />商品管理</span>}>

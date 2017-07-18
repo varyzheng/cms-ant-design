@@ -4,9 +4,11 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import SidePublic from './SidePublic';
 import SideSiwangyin from './SideSiwangyin';
 import QueryUserTable from './user/QueryUserTable';
-import QueryNavTable from './nav/QueryNavTable';
 import AddUserForm from './user/AddUserForm';
+import QueryNavTable from './nav/QueryNavTable';
 import AddNavForm from './nav/AddNavForm';
+import QueryTagTable from './tag/QueryTagTable';
+import AddTagForm from './tag/AddTagForm';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -46,6 +48,10 @@ class IndexContainer extends React.Component {
         return <QueryNavTable data={this.state.data} saveNav={(nav) => {this.props.saveNav(nav)}}/>;
       case 'addNav':
         return <AddNavForm addNav={(nav) => {this.props.addNav(nav)}} navList={this.state.data}/>;  
+      case 'queryTag':
+        return <QueryTagTable data={this.state.data} saveTag={(tag) => {this.props.saveTag(tag)}}/>;
+      case 'addTag':
+        return <AddTagForm addTag={(tag) => {this.props.addTag(tag)}} />; 
       default:
         return "未选中功能，或该功能暂未开放!";
     }

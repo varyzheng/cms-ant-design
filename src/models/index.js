@@ -25,15 +25,23 @@ export default {
       dataToEditableData(state.data);
       return {...state};
     },
-    updateNav(state, {payload}) {
-      dataToEditableData(state.data);
-      return {...state};
-    },
     addUser(state) {
       message.success('添加用户成功!');
       return {...state};
     },
+    updateNav(state, {payload}) {
+      dataToEditableData(state.data);
+      return {...state};
+    },
     addNav(state) {
+      message.success('添加导航成功!');
+      return {...state};
+    },
+    updateTag(state, {payload}) {
+      dataToEditableData(state.data);
+      return {...state};
+    },
+    addTag(state) {
       message.success('添加导航成功!');
       return {...state};
     }
@@ -63,6 +71,14 @@ export default {
           break;
         case 'addNav':
           chunk = yield call(siwangyinService.queryNav);
+          yield put({type:'save', payload:{ data:chunk.data, features:payload.features }});
+          break;
+        case 'queryTag':
+          chunk = yield call(siwangyinService.queryTag);
+          yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
+          break;
+        case 'addTag':
+          chunk = yield call(siwangyinService.queryTag);
           yield put({type:'save', payload:{ data:chunk.data, features:payload.features }});
           break;
       }
@@ -97,6 +113,18 @@ export default {
     *queryNavTags({payload}, {call, put}){
       let chunk = yield call(siwangyinService.queryNavTags);
       yield put({type:'save', payload:{ tagList:chunk.data }});
+    },
+    *saveTag({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.saveTag, payload);
+      if (chunk.data.flag) {
+        yield put({type:'updateTag'});
+      }
+    },
+    *addTag({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.addTag, payload);
+      if (chunk.data.flag) {
+        put({type:'addTag'});
+      }
     }
   },
   subscriptions: {

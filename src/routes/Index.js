@@ -27,22 +27,34 @@ const Index = ({dispatch, user, features, data}) => {
       payload:user
     });
   }
-  const saveNav = (nav) => {
-    dispatch({
-      type:'index/saveNav',
-      payload:nav
-    });
-  }
   const addUser = (user) => {
     dispatch({
       type:'index/addUser',
       payload:user
     });
   }
+  const saveNav = (nav) => {
+    dispatch({
+      type:'index/saveNav',
+      payload:nav
+    });
+  }
   const addNav = (nav) => {
     dispatch({
       type:'index/addNav',
       payload:nav
+    });
+  }
+  const saveTag = (tag) => {
+    dispatch({
+      type:'index/saveTag',
+      payload:tag
+    });
+  }
+  const addTag = (tag) => {
+    dispatch({
+      type:'index/addTag',
+      payload:tag
     });
   }
   return(
@@ -55,6 +67,8 @@ const Index = ({dispatch, user, features, data}) => {
         addUser={addUser} 
         saveNav={saveNav}
         addNav={addNav} 
+        saveTag={saveTag}
+        addTag={addTag}
       />
     </div>
   );

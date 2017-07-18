@@ -1,10 +1,9 @@
 import { Table, Popconfirm } from 'antd';
 import EditableCell from '../EditableCell';
-import NavTagCell from './NavTagCell';
-import NavParentCell from './NavParentCell';
+import NavParentCell from '../nav/NavParentCell';
 import { dataToEditableData, editableDataToData } from '../../utils/DataFormatter';
 
-class QueryNavTable extends React.Component {
+class QueryTagTable extends React.Component {
   constructor(props) {
     super(props);
     this.columns = [{
@@ -22,16 +21,6 @@ class QueryNavTable extends React.Component {
       dataIndex: 'text',
       key:'text',
       render: (text, record, index) => this.renderColumns(this.state.data, index, 'text', text),
-    }, {
-      title: '跳转路径',
-      dataIndex: 'href',
-      key:'href',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'href', text),
-    }, {
-      title: '类型对应标签',
-      dataIndex: 'tagIds',
-      key:'tagIds',
-      render: (text, record, index) => this.renderTagColumns(this.state.data, index, 'tagIds', text),
     }, {
       title: '父级ID',
       dataIndex: 'parentId',
@@ -86,18 +75,6 @@ class QueryNavTable extends React.Component {
       status={status}
     />);
   }
-  renderTagColumns(data, index, key, text) {
-    const { editable, status } = data[index][key];
-    if (typeof editable === 'undefined') {
-      return text;
-    }
-    return (<NavTagCell
-      editable={editable}
-      value={text}
-      onChange={value => this.handleTagChange(key, index, value)}
-      status={status}
-    />);
-  }
   renderParentColumns(data, index, key, text) {
     const { editable, status } = data[index][key];
     if (typeof editable === 'undefined') {
@@ -120,7 +97,7 @@ class QueryNavTable extends React.Component {
     const { data } = this.state;
     data[index][key].value = value;
     this.setState({ data }, () => {
-      this.props.saveNav(editableDataToData(data[index]));
+      this.props.saveTag(editableDataToData(data[index]));
     });
   }
   edit(index) {
@@ -146,7 +123,7 @@ class QueryNavTable extends React.Component {
           delete data[index][item].status;
         }
       });
-      this.props.saveNav(editableDataToData(data[index]));
+      this.props.saveTag(editableDataToData(data[index]));
     });
   }
   render() {
@@ -159,9 +136,9 @@ class QueryNavTable extends React.Component {
       return obj;
     });
     const columns = this.columns;
-    const pagination = {pageSize:20}
+    const pagination = {pageSize:100}
     return <Table bordered pagination={pagination} dataSource={dataSource} columns={columns}  rowKey="id"/>;
   }
 }
 
-export default QueryNavTable;
+export default QueryTagTable;
