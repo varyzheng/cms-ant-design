@@ -63,7 +63,7 @@ export default {
           break;
         case 'addNav':
           chunk = yield call(siwangyinService.queryNav);
-          yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
+          yield put({type:'save', payload:{ data:chunk.data, features:payload.features }});
           break;
       }
     },

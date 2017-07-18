@@ -51,9 +51,8 @@ class AddNavForm extends React.Component {
 
     const { navList, tagList, navValue, tagValue, href } = this.state;
     
-    const cloneData = editableDataToData(clone(navList));
     let parentList = [];
-    for (let nav of cloneData) {
+    for (let nav of navList) {
         if (nav.parentId === 0 || nav.parentId.value === 0) {
             parentList.push(nav);
         }

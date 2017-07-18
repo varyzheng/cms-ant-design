@@ -151,6 +151,7 @@ class QueryNavTable extends React.Component {
   }
   render() {
     const { data } = this.state;
+    console.log("------------data:", data);
     const dataSource = data.map((item) => {
       const obj = {};
       Object.keys(item).forEach((key) => {

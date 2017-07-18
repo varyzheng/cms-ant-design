@@ -1,8 +1,10 @@
 export function dataToEditableData(data){
-    for(let obj of data) {
-        for(let key in obj) {
-            if (typeof (obj[key]) !== "function" && typeof (obj[key]) !== "object") {
-                obj[key] = {editable:false, value:obj[key]};
+    if (typeof (data) === 'object' && data.length > 0) {
+        for(let obj of data) {
+            for(let key in obj) {
+                if (typeof (obj[key]) !== "function" && typeof (obj[key]) !== "object") {
+                    obj[key] = {editable:false, value:obj[key]};
+                }
             }
         }
     }
