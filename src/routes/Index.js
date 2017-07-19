@@ -69,6 +69,42 @@ const Index = ({dispatch, user, features, data}) => {
       payload:commodity
     });
   }
+   const saveArticleSeries = (series) => {
+    dispatch({
+      type:'index/saveArticleSeries',
+      payload:series
+    });
+  }
+  const addArticleSeries = (series) => {
+    dispatch({
+      type:'index/addCommodity',
+      payload:series
+    });
+  }
+  const saveArticle = (article) => {
+    dispatch({
+      type:'index/saveArticle',
+      payload:article
+    });
+  }
+  const addArticle = (article) => {
+    dispatch({
+      type:'index/addArticle',
+      payload:article
+    });
+  }
+  const saveNews = (news) => {
+    dispatch({
+      type:'index/saveNews',
+      payload:news
+    });
+  }
+  const addNews = (news) => {
+    dispatch({
+      type:'index/addNews',
+      payload:news
+    });
+  }
   return(
     <div>
       <IndexContainer 
@@ -83,6 +119,12 @@ const Index = ({dispatch, user, features, data}) => {
         addTag={addTag}
         saveCommodity={saveCommodity}
         addCommodity={addCommodity}
+        saveArticleSeries={saveArticleSeries}
+        addArticleSeries={addArticleSeries}
+        saveArticle={saveArticle}
+        addArticle={addArticle}
+        saveNews={saveNews}
+        addNews={addNews}
       />
     </div>
   );

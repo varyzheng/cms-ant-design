@@ -141,3 +141,84 @@ export function addCommodity(payload){
     body: JSON.stringify(payload)
   });
 }
+/* ArticleSeries */
+export function queryArticleSeries(){
+  return request("/service/siwangyin/queryArticleSeries", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
+export function saveArticleSeries(payload){
+  return request("/service/siwangyin/saveArticleSeries", {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}
+export function addArticleSeries(payload){
+  return request("/service/siwangyin/addArticleSeries", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}
+/* Article */
+export function queryArticle(){
+  return request("/service/siwangyin/queryArticle", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
+export function saveArticle(payload){
+  return request("/service/siwangyin/saveArticle", {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}
+export function addArticle(payload){
+  return request("/service/siwangyin/addArticle", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}
+/* News */
+export function queryNews(){
+  return request("/service/siwangyin/queryNews", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
+export function saveNews(payload){
+  return request("/service/siwangyin/saveNews", {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}
+export function addNews(payload){
+  return request("/service/siwangyin/addNews", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}

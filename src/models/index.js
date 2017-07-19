@@ -52,6 +52,30 @@ export default {
     addCommodity(state) {
       message.success('添加成功!');
       return {...state};
+    },
+    updateArticleSeries(state, {payload}) {
+      dataToEditableData(state.data);
+      return {...state};
+    },
+    addArticleSeries(state) {
+      message.success('添加成功!');
+      return {...state};
+    },
+    updateArticle(state, {payload}) {
+      dataToEditableData(state.data);
+      return {...state};
+    },
+    addArticle(state) {
+      message.success('添加成功!');
+      return {...state};
+    },
+    updateNews(state, {payload}) {
+      dataToEditableData(state.data);
+      return {...state};
+    },
+    addNews(state) {
+      message.success('添加成功!');
+      return {...state};
     }
   },
   effects: {
@@ -86,17 +110,35 @@ export default {
           yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
           break;
         case 'addTag':
-          chunk = yield call(siwangyinService.queryTag);
-          yield put({type:'save', payload:{ data:chunk.data, features:payload.features }});
+          yield put({type:'save', payload:{ features:payload.features }});
           break;
         case 'queryCommodity':
           chunk = yield call(siwangyinService.queryCommodity);
-          console.log(chunk.data);
           yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
           break;
         case 'addCommodity':
-          chunk = yield call(siwangyinService.queryCommodity);
-          yield put({type:'save', payload:{ data:chunk.data, features:payload.features }});
+          yield put({type:'save', payload:{ features:payload.features }});
+          break;
+        case 'queryArticleSeries':
+          chunk = yield call(siwangyinService.queryArticleSeries);
+          yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
+          break;
+        case 'addArticleSeries':
+          yield put({type:'save', payload:{ features:payload.features }});
+          break;
+        case 'queryArticle':
+          chunk = yield call(siwangyinService.queryArticle);
+          yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
+          break;
+        case 'addArticle':
+          yield put({type:'save', payload:{ features:payload.features }});
+          break;
+        case 'queryNews':
+          chunk = yield call(siwangyinService.queryNews);
+          yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
+          break;
+        case 'addNews':
+          yield put({type:'save', payload:{ features:payload.features }});
           break;
       }
     },
@@ -157,6 +199,42 @@ export default {
       let chunk = yield call(siwangyinService.addCommodity, payload);
       if (chunk.data.flag) {
         put({type:'addCommodity'});
+      }
+    },
+    *saveArticleSeries({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.saveArticleSeries, payload);
+      if (chunk.data.flag) {
+        yield put({type:'updateArticleSeries'});
+      }
+    },
+    *addArticleSeries({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.addArticleSeries, payload);
+      if (chunk.data.flag) {
+        put({type:'addArticleSeries'});
+      }
+    },
+    *saveArticle({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.saveArticle, payload);
+      if (chunk.data.flag) {
+        yield put({type:'updateArticle'});
+      }
+    },
+    *addArticle({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.addArticle, payload);
+      if (chunk.data.flag) {
+        put({type:'addArticle'});
+      }
+    },
+    *saveNews({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.saveNews, payload);
+      if (chunk.data.flag) {
+        yield put({type:'updateNews'});
+      }
+    },
+    *addNews({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.addNews, payload);
+      if (chunk.data.flag) {
+        put({type:'addNews'});
       }
     }
   },
