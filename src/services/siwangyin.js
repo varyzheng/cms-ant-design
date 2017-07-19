@@ -106,3 +106,38 @@ export function addTag(payload){
     body: JSON.stringify(payload)
   });
 }
+/* Commodity */
+export function queryAllTags(){
+  return request("/service/siwangyin/queryAllTags", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
+export function queryCommodity(){
+  return request("/service/siwangyin/queryCommodity", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
+export function saveCommodity(payload){
+  return request("/service/siwangyin/saveCommodity", {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}
+export function addCommodity(payload){
+  return request("/service/siwangyin/addCommodity", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}

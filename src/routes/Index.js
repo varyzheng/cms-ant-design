@@ -57,6 +57,18 @@ const Index = ({dispatch, user, features, data}) => {
       payload:tag
     });
   }
+  const saveCommodity = (commodity) => {
+    dispatch({
+      type:'index/saveCommodity',
+      payload:commodity
+    });
+  }
+  const addCommodity = (commodity) => {
+    dispatch({
+      type:'index/addCommodity',
+      payload:commodity
+    });
+  }
   return(
     <div>
       <IndexContainer 
@@ -69,6 +81,8 @@ const Index = ({dispatch, user, features, data}) => {
         addNav={addNav} 
         saveTag={saveTag}
         addTag={addTag}
+        saveCommodity={saveCommodity}
+        addCommodity={addCommodity}
       />
     </div>
   );

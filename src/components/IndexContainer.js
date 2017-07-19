@@ -9,6 +9,8 @@ import QueryNavTable from './nav/QueryNavTable';
 import AddNavForm from './nav/AddNavForm';
 import QueryTagTable from './tag/QueryTagTable';
 import AddTagForm from './tag/AddTagForm';
+import QueryCommodityTable from './commodity/QueryCommodityTable';
+import AddCommodityForm from './commodity/AddCommodityForm';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -52,6 +54,10 @@ class IndexContainer extends React.Component {
         return <QueryTagTable data={this.state.data} saveTag={(tag) => {this.props.saveTag(tag)}}/>;
       case 'addTag':
         return <AddTagForm addTag={(tag) => {this.props.addTag(tag)}} />; 
+      case 'queryCommodity':
+        return <QueryCommodityTable data={this.state.data} saveCommodity={(commodity) => {this.props.saveCommodity(commodity)}}/>;
+      case 'addCommodity':
+        return <AddCommodityForm addCommodity={(commodity) => {this.props.addCommodity(commodity)}} />; 
       default:
         return "未选中功能，或该功能暂未开放!";
     }

@@ -26,7 +26,7 @@ export default {
       return {...state};
     },
     addUser(state) {
-      message.success('添加用户成功!');
+      message.success('添加成功!');
       return {...state};
     },
     updateNav(state, {payload}) {
@@ -34,7 +34,7 @@ export default {
       return {...state};
     },
     addNav(state) {
-      message.success('添加导航成功!');
+      message.success('添加成功!');
       return {...state};
     },
     updateTag(state, {payload}) {
@@ -42,7 +42,15 @@ export default {
       return {...state};
     },
     addTag(state) {
-      message.success('添加导航成功!');
+      message.success('添加成功!');
+      return {...state};
+    },
+    updateCommodity(state, {payload}) {
+      dataToEditableData(state.data);
+      return {...state};
+    },
+    addCommodity(state) {
+      message.success('添加成功!');
       return {...state};
     }
   },
@@ -79,6 +87,15 @@ export default {
           break;
         case 'addTag':
           chunk = yield call(siwangyinService.queryTag);
+          yield put({type:'save', payload:{ data:chunk.data, features:payload.features }});
+          break;
+        case 'queryCommodity':
+          chunk = yield call(siwangyinService.queryCommodity);
+          console.log(chunk.data);
+          yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
+          break;
+        case 'addCommodity':
+          chunk = yield call(siwangyinService.queryCommodity);
           yield put({type:'save', payload:{ data:chunk.data, features:payload.features }});
           break;
       }
@@ -124,6 +141,22 @@ export default {
       let chunk = yield call(siwangyinService.addTag, payload);
       if (chunk.data.flag) {
         put({type:'addTag'});
+      }
+    },
+    *queryAllTags({payload}, {call, put}){
+      let chunk = yield call(siwangyinService.queryAllTags);
+      yield put({type:'save', payload:{ tagList:chunk.data }});
+    },
+    *saveCommodity({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.saveCommodity, payload);
+      if (chunk.data.flag) {
+        yield put({type:'updateCommodity'});
+      }
+    },
+    *addCommodity({payload}, {call, put}) {
+      let chunk = yield call(siwangyinService.addCommodity, payload);
+      if (chunk.data.flag) {
+        put({type:'addCommodity'});
       }
     }
   },
