@@ -121,6 +121,7 @@ export default {
           break;
         case 'queryArticleSeries':
           chunk = yield call(siwangyinService.queryArticleSeries);
+          console.log("chunk:",chunk);
           yield put({type:'save', payload:{ data:dataToEditableData(chunk.data), features:payload.features }});
           break;
         case 'addArticleSeries':
@@ -224,6 +225,10 @@ export default {
       if (chunk.data.flag) {
         put({type:'addArticle'});
       }
+    },
+    *queryNews({payload}, {call, put}){
+      let chunk = yield call(siwangyinService.queryNews);
+      yield put({type:'save', payload:{ tagList:chunk.data }});
     },
     *saveNews({payload}, {call, put}) {
       let chunk = yield call(siwangyinService.saveNews, payload);

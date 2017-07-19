@@ -9,7 +9,7 @@
       ],
       "proxy":{
         "/service":{
-          "target": "http://localhost:7999/",
+          "target": "http://127.0.0.1:7999/",
           "changeOrigin": true,
           "pathRewrite": {"^/service" : ""}
         },

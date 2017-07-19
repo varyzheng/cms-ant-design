@@ -77,7 +77,7 @@ const Index = ({dispatch, user, features, data}) => {
   }
   const addArticleSeries = (series) => {
     dispatch({
-      type:'index/addCommodity',
+      type:'index/addArticleSeries',
       payload:series
     });
   }

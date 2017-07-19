@@ -11,6 +11,12 @@ import QueryTagTable from './tag/QueryTagTable';
 import AddTagForm from './tag/AddTagForm';
 import QueryCommodityTable from './commodity/QueryCommodityTable';
 import AddCommodityForm from './commodity/AddCommodityForm';
+import QueryArticleSeriesTable from './article/QueryArticleSeriesTable';
+import AddArticleSeriesForm from './article/AddArticleSeriesForm';
+import QueryArticleTable from './article/QueryArticleTable';
+import AddArticleForm from './article/AddArticleForm';
+import QueryNewsTable from './nav/QueryNewsTable';
+import AddNewsForm from './nav/AddNewsForm';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -57,7 +63,19 @@ class IndexContainer extends React.Component {
       case 'queryCommodity':
         return <QueryCommodityTable data={this.state.data} saveCommodity={(commodity) => {this.props.saveCommodity(commodity)}}/>;
       case 'addCommodity':
-        return <AddCommodityForm addCommodity={(commodity) => {this.props.addCommodity(commodity)}} />; 
+        return <AddCommodityForm addCommodity={(commodity) => {this.props.addCommodity(commodity)}} />;
+      case 'queryArticleSeries':
+        return <QueryArticleSeriesTable data={this.state.data} saveArticleSeries={(series) => {this.props.saveArticleSeries(series)}}/>;
+      case 'addArticleSeries':
+        return <AddArticleSeriesForm addArticleSeries={(series) => {this.props.addArticleSeries(series)}} />;
+      case 'queryArticle':
+        return <QueryArticleTable data={this.state.data} saveArticles={(article) => {this.props.saveArticle(article)}}/>;
+      case 'addArticle':
+        return <AddArticleForm addArticle={(article) => {this.props.addArticle(article)}} />;
+      case 'queryNews':
+        return <QueryNewsTable data={this.state.data} saveNews={(news) => {this.props.saveNews(news)}}/>;
+      case 'addNews':
+        return <AddNewsForm addNews={(news) => {this.props.addNews(news)}} />;
       default:
         return "未选中功能，或该功能暂未开放!";
     }
