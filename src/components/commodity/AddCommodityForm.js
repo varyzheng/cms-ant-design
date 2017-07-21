@@ -1,6 +1,7 @@
 import { Form, Input, Radio, Icon, Checkbox, Button, AutoComplete } from 'antd';
 import { editableDataToData, dataToValueLabelData, clone } from '../../utils/DataFormatter';
 import { connect } from 'dva';
+import HtmlEditor from '../HtmlEditor';
 const CheckboxGroup = Checkbox.Group;
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
@@ -27,10 +28,10 @@ class AddCommodityForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        
         values.tagNames = values.tagNames.join("-");
+        values.detailHtml = UM.getEditor('addCommodityHtmlEditor').getContent();
         this.props.addCommodity(values);
-        this.props.form.resetFields();
+        // this.props.form.resetFields();
       }
     });
   }
@@ -154,13 +155,9 @@ class AddCommodityForm extends React.Component {
           label="商品详情"
           hasFeedback
         >
-          {getFieldDecorator('detailHtml', {
-            rules: [ {
-              required: true, message: '请输入商品详情'
-            }],
-          })(
-            <Input />
-          )}
+          
+            <HtmlEditor id="addCommodityHtmlEditor"/>
+          
         </FormItem>
         <FormItem
           {...formItemLayout}
