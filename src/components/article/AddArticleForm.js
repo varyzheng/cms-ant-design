@@ -1,6 +1,7 @@
 import { Form, Input, Radio, Icon, Checkbox, Button, AutoComplete } from 'antd';
 import { editableDataToData, dataToValueLabelData, clone } from '../../utils/DataFormatter';
 import { connect } from 'dva';
+import HtmlEditor from '../HtmlEditor';
 const CheckboxGroup = Checkbox.Group;
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
@@ -16,6 +17,7 @@ class AddArticleForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        values.content = UM.getEditor('addArticleHtmlEditor').getContent();
         this.props.addArticle(values);
         this.props.form.resetFields();
       }
@@ -97,13 +99,7 @@ class AddArticleForm extends React.Component {
           label="内容"
           hasFeedback
         >
-          {getFieldDecorator('content', {
-            rules: [{
-              required: true, message: '请输入内容'
-            }],
-          })(
-            <Input />
-          )}
+          <HtmlEditor id="addArticleHtmlEditor"/>
         </FormItem>
         <FormItem
           {...formItemLayout}

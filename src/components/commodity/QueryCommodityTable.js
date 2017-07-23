@@ -1,6 +1,7 @@
 import { Table, Popconfirm } from 'antd';
 import EditableCell from '../EditableCell';
 import { dataToEditableData, editableDataToData } from '../../utils/DataFormatter';
+import HtmlCell from '../HtmlCell';
 
 class QueryCommodityTable extends React.Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class QueryCommodityTable extends React.Component {
       title: '商品详情',
       dataIndex: 'detailHtml',
       key:'detailHtml',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'detailHtml', text),
+      render: (text, record, index) => this.renderHtmlColumns(this.state.data, index, 'detailHtml', text),
     }, {
       title: '加购次数',
       dataIndex: 'cartSale',
@@ -117,10 +118,35 @@ class QueryCommodityTable extends React.Component {
       status={status}
     />);
   }
+  renderHtmlColumns(data, index, key, text) {
+    const { editable, status } = data[index][key];
+    if (typeof editable === 'undefined') {
+      return text;
+    }
+    return (<HtmlCell
+      editable={editable}
+      value={text}
+      onChange={value => this.handleHtmlChange(key, index, value)}
+      status={status}
+      id={data[index].id.value}
+    />);
+  }
   handleChange(key, index, value) {
     const { data } = this.state;
     data[index][key].value = value;
     this.setState({ data });
+  }
+  handleHtmlChange(key, index, value) {
+    const { data } = this.state;
+    data[index][key].value = value;
+    this.setState({ data }, () => {
+      Object.keys(data[index]).forEach((item) => {
+        if (data[index][item] && typeof data[index][item].editable !== 'undefined') {
+          delete data[index][item].status;
+        }
+      });
+      this.props.saveCommodity(editableDataToData(data[index]));
+    });
   }
   edit(index) {
     const { data } = this.state;

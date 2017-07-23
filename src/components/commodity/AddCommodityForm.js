@@ -31,7 +31,6 @@ class AddCommodityForm extends React.Component {
         values.tagNames = values.tagNames.join("-");
         values.detailHtml = UM.getEditor('addCommodityHtmlEditor').getContent();
         this.props.addCommodity(values);
-        // this.props.form.resetFields();
       }
     });
   }
@@ -40,7 +39,6 @@ class AddCommodityForm extends React.Component {
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   }
   onTagChange = (checkedValues) => {
-      console.log(checkedValues);
       this.setState({tagValue: JSON.stringify(checkedValues)});
   }
   render() {
@@ -155,9 +153,7 @@ class AddCommodityForm extends React.Component {
           label="商品详情"
           hasFeedback
         >
-          
-            <HtmlEditor id="addCommodityHtmlEditor"/>
-          
+          <HtmlEditor id="addCommodityHtmlEditor"/>
         </FormItem>
         <FormItem
           {...formItemLayout}

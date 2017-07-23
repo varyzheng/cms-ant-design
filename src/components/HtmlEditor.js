@@ -6,7 +6,10 @@ class HtmlEditor extends React.Component {
     html:this.props.html,
   }
   componentDidMount() {
-    UM.getEditor(this.state.id);
+    var editor = UM.getEditor(this.state.id);
+    editor.addListener("ready", function () {
+        editor.setContent(this.state.html);
+    });
   }
   render() {
     var style = {

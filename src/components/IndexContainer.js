@@ -69,7 +69,7 @@ class IndexContainer extends React.Component {
       case 'addArticleSeries':
         return <AddArticleSeriesForm addArticleSeries={(series) => {this.props.addArticleSeries(series)}} />;
       case 'queryArticle':
-        return <QueryArticleTable data={this.state.data} saveArticles={(article) => {this.props.saveArticle(article)}}/>;
+        return <QueryArticleTable data={this.state.data} saveArticle={(article) => {this.props.saveArticle(article)}}/>;
       case 'addArticle':
         return <AddArticleForm addArticle={(article) => {this.props.addArticle(article)}} />;
       case 'queryNews':
